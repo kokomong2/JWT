@@ -23,8 +23,7 @@ public class CommentController {
     @PostMapping("/api/memos/comments")
     public Comment postComments(@RequestBody CommentRequestDto requestDto,
                                 @AuthenticationPrincipal UserDetailsImpl userDetails){
-//        Long userId = userDetails.getUser().getId();
-        Long userId = 11L;
+        Long userId = userDetails.getUser().getId();
         Comment comment = new Comment(requestDto, userId);
         return commentRepository.save(comment);
     }

@@ -2,11 +2,11 @@ $(document).ready(function () {
     hello();
 })
 
-function add_comments(){
-    alert("댓글저장!")
+function add_comments(memoId){
+
 
     let comments = $('#user_comment').val();
-    let data={"memoId" : 10,"comments":comments};
+    let data={"memoId" : memoId,"comments":comments};
 
     $.ajax({
         type: "POST",
@@ -14,11 +14,10 @@ function add_comments(){
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function (response) {
-            alert('메시지가 성공적으로 작성되었습니다.');
+            alert('댓글이 성공적으로 저장되었습니다.');
             window.location.reload();
         }
     });
 }
 function hello(){
-    alert("댓글페이지에요!")
 }
