@@ -20,8 +20,10 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        model.addAttribute("username", userDetails.getUsername());
-        model.addAttribute("userId", userDetails.getUser().getId());
+        if (userDetails != null){
+            model.addAttribute("username", userDetails.getUsername());
+            model.addAttribute("userId", userDetails.getUser().getId());
+        }
         return "index";
     }
 
