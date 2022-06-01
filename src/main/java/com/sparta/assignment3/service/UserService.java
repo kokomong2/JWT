@@ -3,6 +3,7 @@ package com.sparta.assignment3.service;
 
 import com.sparta.assignment3.dto.SignupRequestDto;
 import com.sparta.assignment3.model.User;
+import com.sparta.assignment3.model.UserRoleEnum;
 import com.sparta.assignment3.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,8 +35,10 @@ public class UserService {
         String password = passwordEncoder.encode(requestDto.getPassword());
         String email = requestDto.getEmail();
 
+        UserRoleEnum role = UserRoleEnum.USER;
 
-        User user = new User(username, password, email);
+
+        User user = new User(username, password, email, role);
         userRepository.save(user);
     }
 

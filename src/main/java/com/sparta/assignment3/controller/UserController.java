@@ -3,6 +3,7 @@ package com.sparta.assignment3.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import com.sparta.assignment3.dto.SignupRequestDto;
+import com.sparta.assignment3.dto.UserInfoDto;
 import com.sparta.assignment3.model.Memo;
 import com.sparta.assignment3.model.User;
 import com.sparta.assignment3.repository.UserRepository;
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     // 회원 로그인 페이지
-    @GetMapping("/user/login")
+    @GetMapping("/user/loginView")
     public String login() {
         return "login";
     }
@@ -51,7 +52,14 @@ public class UserController {
     //전체 유저 조회
     @ResponseBody
     @GetMapping("/user/all")
-    public List<User> getUsers(@AuthenticationPrincipal UserDetailsImpl userDetails){
+    public List<User> getUsers(){
         return userRepository.findAll();
+    }
+
+    @PostMapping("/user/userinfo")
+    @ResponseBody
+    public UserInfoDto getUserInfo(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        String username = userDetails.getUser().getUsername();
+        return new UserInfoDto(username);
     }
 }
